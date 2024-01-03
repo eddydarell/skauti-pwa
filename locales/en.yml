@@ -5,10 +5,338 @@ button:
   home: Home
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+buttons:
+  add-address: Add Address
+  add-business: Add business
+  add-new-business: Add new business
+  add-social-media-link: Add social media
+  add-social-media-links: Add social media links
+  cancel: Cancel
+  collapse: Collapse
+  confirm: Confirm
+  delete: Delete
+  delete-address: Delete address
+  delete-business: Delete business
+  edit: Edit
+  edit-address: Edit address
+  expand: Expand
+  fill-random-data: Random data
+  hide-reviews: Hide reviews
+  less: Less
+  login-register: Login / Register
+  more: More
+  ok: OK
+  open-map: Open map
+  register: Register
+  remove-address: Remove address
+  save: Save
+  seed-form: Seed form
+  show-reviews: Show reviews
+  submit: Submit
+  submit-review: Submit review
+  update: Update
+  view: View
+days:
+  friday: Friday
+  monday: Monday
+  saturday: Saturday
+  sunday: Sunday
+  thursday: Thursday
+  tuesday: Tuesday
+  wednesday: Wednesday
+footer:
+  made-by: Made by
+greetings:
+  afternoon: Good afternoon
+  evening: Good evening
+  morning: Good morning
+hints:
+  default-geocoding: Default geocoding will be used.
+  no-geocode-error-hint: 'Unable to geocode this address, city or country. '
+  no-geocode-hint: The address couldn't be geocoded. No marker will be added to the map.
+  no-markers: Your business won't appear on the map
+  radius-for-geofencing: 'Radius for geofencing. '
+  review: Please leave a review
+info:
+  not-available: Not available
 intro:
+  aka: Also known as
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
-  aka: Also known as
   whats-your-name: What's your name?
+labels:
+  address: address
+  all-day: All day
+  anonymous: Review anonymously
+  category: Category
+  city: City
+  closed: Closed
+  closing-hours: Closing hours
+  country: Country
+  cover: Cover
+  creation-date: Creation date
+  days-off: Days off
+  description: Description
+  email: Email
+  is-primary: Primary
+  kilometers: Km
+  leave-review: Leave a review
+  legal-address: Legal address
+  legal-cancellation: Legal cancellation
+  legal-cancellation-file: Legal cancellation file
+  legal-description: Legal description
+  legal-email: Legal email
+  legal-logo: Legal logo
+  legal-name: Legal name
+  legal-phone: Legal phone
+  legal-privacy: Legal privacy
+  legal-privacy-file: Legal privacy file
+  legal-refund: Legal refund
+  legal-refund-file: Legal refund file
+  legal-shipping: Legal shipping
+  legal-shipping-file: Legal shipping file
+  legal-terms: Legal terms
+  legal-terms-file: Legal terms file
+  legal-terms-url: Legal terms URL
+  legal-website: Legal website
+  logo: Logo
+  meters-from-this-point: from this point
+  more: More
+  name: Name
+  open: Open
+  opening-hours: Opening hours
+  organization-number: Organization number
+  phone: Phone
+  postal-code: Postal code
+  radius: Radius
+  search-placeholder: Category, business, services...
+  social-media: Social media
+  social-media-links: Social media links
+  street: Street
+  subcategory: Subcategory
+  tags: Tags
+  website: Website
+  you-are-here: You are here
+  you-are-within: 'You are within '
+languages:
+  en: English
+  fr: French
+  gb: English (GB)
+  ln: Lingala
+  rw: Kinyarwanda
+  sw: Swahili
+  us: English (US)
+links:
+  account: Account
+  address: Address
+  addresses: Addresses
+  businesses: Businesses
+  categories: Categories
+  dashboard: Dashboard
+  here: here
+  home: Home
+  login: Login
+  logout: Logout
+  register: Register business
+  settings: Settings
+  update: Update business
+messages:
+  address-saved: Address saved
+  error-occurred: An error occured.
+  loading-map: Loading map
+  this-is-how-far-your-business-can-appear: This is how far Skauti users can see your business when searching.
 not-found: Not found
+paragraph:
+  are-you-sure-you-want-to-delete-address: Are you sure you want to delete this address?
+  are-you-sure-you-want-to-delete-business: Are you sure you want to delete this business? This CANNOT be undone.
+  here-for-the-first-time: |-
+    Already a business owner?
+
+    Or here for the first time?
+  login-or-register: Login or register to get started
+  portal: portal
+  this-action-cannot-be-undone: This action CANNOT be undone!
+  welcome-to: Welcome to
+paragraphs:
+  add-your-business: Add a new business
+  addresses-cannot-be-edited-here: Addresses cannot be edited here.
+  and: and
+  business-registered-successfully: Business registered successfully!
+  business-updated-successfully: Business updated successfully!
+  categories-cannot-be-edited-here: Categories cannot be edited here
+  city: City
+  competitive-edge: >-
+    Many of your competitors are likely to have an online presence. Having
+    accurate and up-to-date online listings ensures that you remain competitive
+    in the market and do not lose potential customers to competitors with a
+    stronger online presence.
+  conditions: conditions
+  cost-effective-marketing: >-
+    Compared to traditional advertising methods, online business listings are
+    often cost-effective. They provide a broad reach without the high costs
+    associated with traditional marketing channels.
+  country: Country
+  create-your-first-business: Create your first business by clicking on the button above.
+  created: Created
+  customer-insights: >-
+    Online listings often include customer reviews and ratings. Positive reviews
+    can significantly impact potential customers' decisions, and businesses with
+    higher ratings are more likely to attract customers.
+  default-address: Default address
+  did-you-know: Did you know?
+  do-you-accept: Do you accepted the
+  error-occurred: Something went wrong! Please try again!
+  feature-under-construction: >-
+    This feature is currently under constraction and will be made available very
+    soon...
+  getting-things-ready: Getting everything ready
+  however-only-you-can-modify: However, only you can add, edit or delete your businesses
+  if-the-problem-persists: 'If the issue persists, contact us at '
+  if-this-continues-please-contact-us: If this happens again, contact us!
+  increased-discoverability: >-
+    Online listings enhance your chances of being discovered by users who may
+    not have been aware of your business otherwise. This is particularly
+    important for attracting new customers and expanding your customer base.
+  increased-visibility: >-
+    According to various studies, a significant percentage of consumers search
+    online when looking for local businesses. Being listed online increases your
+    visibility to potential customers who use search engines, online
+    directories, and review platforms.
+  incresed-traffic: >-
+    Online listings often include links to your business website. This can
+    significantly boost your website traffic as users click through to learn
+    more about your products or services.
+  insight-and-analytics: >-
+    Many online listing platforms provide insights and analytics about user
+    interactions with your business profile. Utilizing these statistics allows
+    you to understand user behavior, preferences, and engagement patterns,
+    helping you make informed business decisions.
+  is-optimized-for-desktop: >-
+    is optimized for use on a desktop computer. For the best experience, please
+    use a desktop computer.
+  local-search-impact: >-
+    Local search statistics show that a substantial number of users conduct
+    local searches to find products, services, and businesses in their vicinity.
+    Having accurate online business listings helps you appear in local search
+    results.
+  more-than-one-address-returned: This address gave more than one location on the map.
+  no-reviews-yet: Be the first to leave a review bellow...
+  please-refere-to-the-address-form: Please refer to the address form
+  please-refere-to-the-category-form: 'Please refer to the category form '
+  please-refere-to-the-social-media-form: Please refer to the social medias form
+  please-refere-to-the-tags-form: Please refer to the tags form
+  please-select-the-right-address: Please select the right location.
+  please-try-again-later: Please, try again later.
+  postal-code: Postal code
+  products-coming-soon: Products coming soon!
+  ratings: ratings
+  services-coming-soon: Services coming soon!
+  skauti-is-optimized-for-desktop: is optimized for desktop. For the best experience, please use a computer.
+  social-medias-cannot-be-edited-here: Social medias cannot be edited here
+  street: Street
+  tags-cannot-be-edited-here: Tags cannot be edited here
+  terms: terms
+  terms-content: >-
+    By using our app, you agree to the following terms and conditions. \n\n
+    #Data Collection$:  We collect personal data such as your name, email
+    address, and other information you provide when you create a business or use
+    our services. We use this data to provide and improve our services, respond
+    to your inquiries, and send you important notices. \n\n #Location Data$: Our
+    app collects location data to provide and improve certain location-based
+    services. You can enable or disable location services in your device
+    settings at any time. \n\n #Media$: If you upload photos or other media to
+    our app, you grant us a non-exclusive, transferable, sub-licensable,
+    royalty-free, worldwide license to use, distribute, modify, run, copy,
+    publicly perform or display, translate, and create derivative works of your
+    content. \n\n #Changes to These Terms$:  We may update these terms and
+    conditions from time to time. We will notify you of any changes by posting
+    the new terms and conditions on this page. \n\n Contact Us  If you have any
+    questions about these terms and conditions, please contact us
+  this-is-how-your-business-will-appear: This is how your business will appear to
+  this-is-the-account-page: This is the account page
+  this-is-the-settings-page: This is the settings page
+  this-search-gave-no-results: This search gave no results in youor vicinity.
+  trust-and-credibility: >-
+    According to surveys, consumers often trust businesses with an online
+    presence more than those without. Online listings contribute to your
+    business's credibility and legitimacy, building trust among potential
+    customers.
+  users: users
+  we-are-unable-to-load-your-businesses: We are unable to load your businesses at the moment.
+  you-can-try: You can try searching in a bigger radius.
+  your-business-is-visible-in-this-radius: Your business will be visible to Skauti users in this radius
+subtitles:
+  required-fields: Fields marked with * are required
+time:
+  afternoon: afternoon
+  evening: evening
+  morning: morning
+title:
+  full-address: Full address
+  good: Good
+  organization-number: Org. number
+  radius: Radius
+  your-business-has-not-yet-been-verified: Your business has not yet been verified
+titles:
+  account: Account
+  add-your-business: Add a new business
+  addresses: Addresses
+  are-you-sure-you-want-to-delete-business: Are you sure you want to delete your business?
+  categories: Categories
+  conditions: Conditions
+  contact: Contact
+  danger-zone: Danger zone
+  days-off: Days off
+  delete-address: Deleting address
+  delete-business: Delete business
+  description: Description
+  details: Details
+  images: Images
+  leave-a-review: Leave a review
+  loading: Loading...
+  login: Login
+  login-to-leave-a-review: Login to leave a review
+  no-businesses-found: No businesses found.
+  no-ratings-yet: No reviews yet
+  no-results: No results
+  no-reviews-yet: No reviews yet
+  of: of
+  on-mobile: On mobile
+  opening-hours: Opening hours
+  please-select-the-right-address: Please select the right address
+  primary-address: Primary address
+  products: Products
+  rating-overview: Rating overview
+  register-your-business: Register your business
+  review-overview: Rating overview
+  services: Services
+  settings: Settings
+  social-medias: Social medias
+  something-went-wrong: Something went wrong
+  subcategories: Subcategories
+  terms: Terms and conditions
+  under-construction: Under construction
+  update-your-business: Update your business
+  user: User
+  your-businesses: Your businesses
+units:
+  kilometers: Km
+validation-messages:
+  category-is-required: category is required
+  city-is-required: city is required
+  country-is-required: country is required
+  description-is-too-long: description is too long
+  email-is-required: Email is required
+  image-is-too-large: Image can't be more than 2MB
+  invalid-date: Invalid creation date
+  invalid-email: Invalid email
+  invalid-phone: Invalid phone number
+  invalid-time: Invalid time
+  invalid-url: Invalid URL
+  name-is-required: Name is required
+  name-is-too-long: Name is too long
+  organization-number-is-required: Org. number is required
+  phone-is-required: Phone is required
+  street-is-required: Street is required
+  terms-must-be-accepted: Terms and conditions must be accepted
