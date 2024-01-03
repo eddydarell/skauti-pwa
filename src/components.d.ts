@@ -7,11 +7,24 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BusinessCard: typeof import('./components/BusinessCard.vue')['default']
+    BusinessListItem: typeof import('./components/BusinessListItem.vue')['default']
+    NoResults: typeof import('./components/NoResults.vue')['default']
     README: typeof import('./components/README.md')['default']
+    ReviewCard: typeof import('./components/ReviewCard.vue')['default']
+    ReviewSummary: typeof import('./components/ReviewSummary.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SocialMediaLink: typeof import('./components/SocialMediaLink.vue')['default']
+    TheBottomNavigation: typeof import('./components/TheBottomNavigation.vue')['default']
+    TheBusinessList: typeof import('./components/TheBusinessList.vue')['default']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
+    TheMainPane: typeof import('./components/TheMainPane.vue')['default']
+    TheMap: typeof import('./components/TheMap.vue')['default']
+    TheMap_old: typeof import('./components/TheMap_old.vue')['default']
+    TheMenu: typeof import('./components/TheMenu.vue')['default']
+    TheSearchBox: typeof import('./components/TheSearchBox.vue')['default']
   }
 }
