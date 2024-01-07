@@ -3,4 +3,5 @@ export const searchTypes = {
   CATEGORY: 'category',
   PRODUCT: 'product',
   SERVICE: 'service',
+  ALL: 'all',
 }

@@ -13,6 +13,10 @@ html.dark {
   color-scheme: dark;
 }
 
+#app {
+  max-width: 800px;
+}
+
 #nprogress {
   pointer-events: none;
 }
@@ -28,17 +32,25 @@ html.dark {
   height: 2px;
 }
 
-img.business-marker-selected{
+.leaflet-container {
+  background: white; /* Replace with the color that matches your tiles */
+}
+
+img.business-marker-selected {
   opacity: 1;
   filter: invert(1);
-  animation: jump .8s .5s ease 1, blinker 1.5s 1.3s linear infinite, invert 1.3s ease 1;
+  animation:
+    jump 0.8s 0.5s ease 1,
+    blinker 1.5s 1.3s linear infinite,
+    invert 1.3s ease 1;
+  z-index: 1000 !important;
   /* animation: blinker 1.5s linear infinite; */
 }
 
-img.user-marker-selected{
+img.user-marker-selected {
   opacity: 1;
   border-radius: 50%;
-  border: 1px solid #1976D2;
+  border: 1px solid #1976d2;
   animation: pulse 1.5s linear infinite;
 }
 
@@ -51,7 +63,6 @@ img.user-marker-selected{
 @keyframes jump {
   0% {
     margin-top: -20px;
-
   }
   50% {
     margin-top: -50px;

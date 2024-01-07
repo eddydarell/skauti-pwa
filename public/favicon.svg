@@ -1,3 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M27.562 26L17.17 8.928l2.366-3.888L17.828 4L16 7.005L14.17 4l-1.708 1.04l2.366 3.888L4.438 26H2v2h28v-2zM16 10.85L25.22 26H17v-8h-2v8H6.78z" fill="#222" />
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4.9912248mm"
+   height="6.263864mm"
+   viewBox="0 0 4.9912248 6.263864"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-83.286997,-21.219907)">
+    <g
+       id="text1"
+       style="font-size:68.2065px;font-family:'.SF Soft Numeric';-inkscape-font-specification:'.SF Soft Numeric';stroke-width:2.13145"
+       transform="scale(0.93640413,1.067915)"
+       aria-label="SKAUTI">
+      <path
+         style="font-size:68.2065px;font-family:Phosphate;-inkscape-font-specification:Phosphate;fill:#e65100;stroke-width:0.272818"
+         d="m 88.943433,19.870408 h 1.87207 v 1.354255 l 1.092041,-1.354255 h 2.262084 l -2.036743,2.682129 2.140747,3.183379 H 92.046216 L 90.815503,23.92438 v 1.811536 h -1.87207 z m 1.092041,5.161999 v -1.187172 l 0.901367,-1.134408 1.577392,2.32158 h 0.268677 l -1.690064,-2.506252 1.551392,-1.952238 h -0.277344 l -2.33142,2.919563 v -2.919563 h -0.225342 v 4.45849 z"
+         id="path5-6" />
+    </g>
+  </g>
 </svg>

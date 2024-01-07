@@ -5,7 +5,7 @@ const uiStore = useUIStore()
 const businessStore = useBusinessStore()
 const bus = useEventBus<string>('map-events')
 
-const hasBusinesses = computed(() => businessStore.businesses.length > 0)
+const hasBusinesses = computed(() => businessStore.businesses?.length > 0)
 
 onMounted(() => {
   if (uiStore.searchActive)
@@ -16,10 +16,12 @@ onMounted(() => {
 <template>
   <div>
     <TheSearchBox pa-4 />
-    <NoResults v-if="uiStore.searchActive && !hasBusinesses" />
-    <div v-else-if="uiStore.searchActive && hasBusinesses" class="list-wrapper">
-      <TheBusinessList />
-    </div>
+    <transition name="show-slide" appear mode="out-in">
+      <NoResults v-if="uiStore.searchActive && !hasBusinesses" />
+      <div v-else-if="uiStore.searchActive && hasBusinesses" class="list-wrapper">
+        <TheBusinessList />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -33,5 +35,17 @@ onMounted(() => {
 .list-wrapper {
   max-height: 100vh;
   overflow-y: scroll;
+}
+
+.show-slide-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+.show-slide-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.show-slide-enter-from,
+.show-slide-leave-to {
+  opacity: 0;
+  transform: translateY(50px);
 }
 </style>

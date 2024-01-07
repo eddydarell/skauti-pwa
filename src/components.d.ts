@@ -25,6 +25,9 @@ declare module 'vue' {
     TheMap: typeof import('./components/TheMap.vue')['default']
     TheMap_old: typeof import('./components/TheMap_old.vue')['default']
     TheMenu: typeof import('./components/TheMenu.vue')['default']
+    TheMobileInfoBox: typeof import('./components/TheMobileInfoBox.vue')['default']
     TheSearchBox: typeof import('./components/TheSearchBox.vue')['default']
+    TheSetup: typeof import('./components/TheSetup.vue')['default']
+    TheSplashScreen: typeof import('./components/TheSplashScreen.vue')['default']
   }
 }

@@ -9,7 +9,6 @@ const props = defineProps({
   },
 })
 
-const show = ref(false)
 const businessStore = useBusinessStore()
 const { navigateTo } = useNavigation()
 
@@ -31,26 +30,10 @@ const formattedDistance = computed(() => {
 
   return `${distance.toFixed(2)} km`
 })
-const otherCategoryCOunt = computed(() => props.business.categories.filter(category => !category.is_subcategory).length - 1)
-const hasMoreThanOneCategory = computed(
-  () => props.business.categories.filter(c => !c.is_subcategory).length > 1,
-)
 
-const truncatedDescription = computed(() =>
-  props.business.description.length > 100
-    ? `${props.business.description.substring(0, 100)} ...`
-    : props.business.description,
-)
 const fullAddress = computed(() =>
   `${primaryAddress.value.street}, ${primaryAddress.value.city}, ${primaryAddress.value.country}`,
 )
-const openingHours = computed(() => {
-  const oh = JSON.parse(props.business.opening_hours)
-  return oh.start
-    ? `${oh.start
-    } - ${oh.end}`
-    : t('info.not-available')
-})
 const averageRating = computed(() => getAverageRating())
 const reviewCount = computed(() => {
   if (props.business.reviews)
@@ -79,7 +62,6 @@ function openBusiness() {
   businessStore.selectedBusiness = props.business
   // useUIStore().businessSelected = true
   navigateTo(`/business/${props.business.id}`)
-  console.log('Open business')
 }
 
 // TODO: add visibility guards for website, email, phone, and social media links

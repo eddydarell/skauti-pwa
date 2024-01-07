@@ -7,10 +7,7 @@ const props = defineProps({
 })
 const { t } = useI18n()
 
-console.log(props.reviews.value)
-
 const averageRating = computed(() => getAverageRating())
-const maxRating = computed(() => Math.max(...props.reviews.map(review => review.rating)))
 const reviewCount = computed(() => props.reviews.length)
 const ratingAggregatePerRating = computed(() => {
   const ratings = props.reviews.map(review => review.rating)
@@ -42,10 +39,10 @@ function getAverageRating() {
       {{ t('titles.rating-overview') }}
     </div>
 
-    <div class="d-flex align-center flex-column my-auto">
+    <div class="d-flex flex-column align-center my-auto">
       <div class="text-h2 mt-5">
         {{ averageRating }}
-        <span class="text-h6 ml-n3">/5</span>
+        <span class="ml-n3 text-h6">/5</span>
       </div>
 
       <v-rating
