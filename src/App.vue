@@ -176,6 +176,7 @@ watch(() => uiStore.pagePosition, () => {
   height: 100vh;
   width: 100%;
   max-width: 800px;
+  background-color: white;
   /* overflow: hidden; */
 }
 .page-handle {
