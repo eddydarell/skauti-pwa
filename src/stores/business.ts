@@ -113,7 +113,6 @@ export const useBusinessStore = defineStore('business', () => {
   }
 
   const getBusinessById = (id: number) => {
-    console.log('ID', id)
     return businesses.value.find((business: any) => business.id === id)
   }
 

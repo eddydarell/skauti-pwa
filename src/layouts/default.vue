@@ -1,13 +1,27 @@
 <template>
-  <!-- <v-container  fluid> -->
-  <RouterView class="r" />
-  <!-- </v-container> -->
-  <!-- <TheFooter /> -->
+  <RouterView v-slot="{ Component }">
+    <transition name="route" mode="out-in" appear>
+      <component :is="Component" />
+    </transition>
+  </RouterView>
 </template>
 
 <style scoped>
-/* .r {
-  padding-bottom: 56px;
-  overflow-y: scroll;
+.route-enter-active,
+.route-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
+}
+
+/* .route-fade-enter-active,
+.route-fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+.route-fade-enter-from,
+.route-fade-leave-to {
+  opacity: 0;
 } */
 </style>

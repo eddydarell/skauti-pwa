@@ -3,15 +3,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 export const useReviewStore = defineStore('review', () => {
   const addReview = async (review: any) => {
     const baseUrl = import.meta.env.VITE_API_URL
-    const {
-      error,
-      data,
-    } = await useFetch(`${baseUrl}/pwa/reviews`).post(review).json()
-    if (error.value) {
-      console.error('Error: ', error.value)
-      return
-    }
-    return data.value
+    return await useFetch(`${baseUrl}/pwa/reviews`).post(review).json()
   }
 
   const fetchUserReview = async (userId: number, businessId: number) => {

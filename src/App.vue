@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { useEventBus, useStorage } from '@vueuse/core'
+import { useDisplay } from 'vuetify'
+
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Vitesse',
+  title: import.meta.env.VITE_APP_NAME,
   meta: [
     {
       name: 'description',
-      content: 'Opinionated Vite Starter Template',
+      content: import.meta.env.VITE_APP_DESCRIPTION,
     },
     {
       name: 'theme-color',
-      content: () => isDark.value ? '#00aba9' : '#ffffff',
+      content: () => '#E65100',
     },
   ],
   link: [
@@ -24,87 +27,69 @@ useHead({
 })
 
 const uiStore = useUIStore()
+const splashScreenCounter = ref(5)
+const { mobile } = useDisplay()
 
-const pageContainerClass = computed(() => {
-  let baseClass = 'page-container'
-  if (uiStore.pagePosition === 0)
-    baseClass += ' page-position-0'
+const mapBus = useEventBus<string>('map-events')
+const appBus = useEventBus<string>('app-events')
 
-  else if (uiStore.pagePosition === 1)
-    baseClass += ' page-position-1'
+const appInit = useStorage('app-init', {
+  init: false,
+})
 
-  else if (uiStore.pagePosition === 2)
-    baseClass += ' page-position-2'
+const showSplashScreen = ref(!appInit.value.init || !mobile)
+const appVersion = computed(() => {
+  return `v${import.meta.env.VITE_APP_VERSION}`
+})
 
-  else if (uiStore.pagePosition === 3)
-    baseClass += ' page-position-3'
+const pageContainerClass = computed({
+  get() {
+    let baseClass = 'page-container'
+    if (uiStore.pagePosition === 0)
+      baseClass += ' page-position-0'
 
-  else if (uiStore.pagePosition === 4)
-    baseClass += ' page-position-4'
+    else if (uiStore.pagePosition === 1)
+      baseClass += ' page-position-1'
 
-  else if (uiStore.pagePosition === 5)
-    baseClass += ' page-position-5'
+    else if (uiStore.pagePosition === 2)
+      baseClass += ' page-position-2'
 
-  return baseClass
+    else if (uiStore.pagePosition === 3)
+      baseClass += ' page-position-3'
+
+    else if (uiStore.pagePosition === 4)
+      baseClass += ' page-position-4'
+
+    else if (uiStore.pagePosition === 5)
+      baseClass += ' page-position-5'
+
+    return baseClass
+  },
+  set(val) {
+    return val
+  },
+})
+
+appBus.on((message) => {
+  if (message === 'setup-done')
+    showSplashScreen.value = false
+    // appInit.value.init = true
+  if (message === 'close-splash-screen')
+    showSplashScreen.value = false
 })
 
 function swipe(direction: string) {
-  console.log('swipe', direction)
-  return
-  const pageContainer: HTMLBaseElement | null = document.querySelector('.page-container')
-  if (pageContainer) {
-    switch (direction) {
-      case 'Up':
-        if (uiStore.pagePosition === 0) {
-          uiStore.pagePosition = 1
-          pageContainer.style.transform = 'translateY(80vh)'
-        }
-        else if (uiStore.pagePosition === 1) {
-          uiStore.pagePosition = 2
-          pageContainer.style.transform = 'translateY(50vh)'
-        }
-        else if (uiStore.pagePosition === 2) {
-          uiStore.pagePosition = 3
-          pageContainer.style.transform = 'translateY(20vh)'
-        }
-        else if (uiStore.pagePosition === 3) {
-          uiStore.pagePosition = 4
-          pageContainer.style.transform = 'translateY(10vh)'
-        }
-        else if (uiStore.pagePosition === 4) {
-          uiStore.pagePosition = 5
-          pageContainer.style.transform = 'translateY(5px)'
-        }
-        else { break }
-        break
-      case 'Down':
-        if (uiStore.pagePosition === 0) {
-          uiStore.pagePosition = 0
-          pageContainer.style.transform = 'translateY(calc(100vh - 65px))'
-        }
-        else if (uiStore.pagePosition === 1) {
-          uiStore.pagePosition = 0
-          pageContainer.style.transform = 'translateY(80vh)'
-        }
-        else if (uiStore.pagePosition === 2) {
-          uiStore.pagePosition = 1
-          pageContainer.style.transform = 'translateY(50vh)'
-        }
-        else if (uiStore.pagePosition === 3) {
-          uiStore.pagePosition = 2
-          pageContainer.style.transform = 'translateY(20vh)'
-        }
-        else if (uiStore.pagePosition === 4) {
-          uiStore.pagePosition = 3
-          pageContainer.style.transform = 'translateY(10vh)'
-        }
-        else if (uiStore.pagePosition === 5) {
-          uiStore.pagePosition = 4
-          pageContainer.style.transform = 'translateY(5px)'
-        }
-        else { break }
-
-        break
+  if (direction === 'Down') {
+    if (uiStore.pagePosition > 0) {
+      uiStore.prevPagePosition = uiStore.pagePosition
+      uiStore.pagePosition = 0
+      mapBus.emit('map-resize')
+    }
+  }
+  else if (direction === 'Up') {
+    if (uiStore.pagePosition < 4) {
+      uiStore.pagePosition = uiStore.prevPagePosition
+      mapBus.emit('map-resize')
     }
   }
 }
@@ -124,20 +109,15 @@ function getPosition(position: number) {
     return 'page-container'
 }
 
-function cyclePosition() {
-  if (uiStore.pagePosition === 0)
-    uiStore.pagePosition = 1
-  else if (uiStore.pagePosition === 1)
-    uiStore.pagePosition = 2
-  else if (uiStore.pagePosition === 2)
-    uiStore.pagePosition = 3
-  else if (uiStore.pagePosition === 3)
-    uiStore.pagePosition = 4
-  else if (uiStore.pagePosition === 4)
-    uiStore.pagePosition = 5
-  else if (uiStore.pagePosition === 5)
-    uiStore.pagePosition = 0
-}
+onMounted(() => {
+  const interval = setInterval(() => {
+    if (splashScreenCounter.value < 1) {
+      clearInterval(interval)
+      return
+    }
+    splashScreenCounter.value--
+  }, 1000)
+})
 
 watch(() => uiStore.pagePosition, () => {
   pageContainerClass.value = getPosition(uiStore.pagePosition)
@@ -145,7 +125,10 @@ watch(() => uiStore.pagePosition, () => {
 </script>
 
 <template>
-  <div class="app-wrapper">
+  <v-container class="app-wrapper">
+    <transition name="splash-screen" appear>
+      <TheSplashScreen v-if="showSplashScreen" />
+    </transition>
     <TheMap />
     <div>
       <v-row>
@@ -173,8 +156,9 @@ watch(() => uiStore.pagePosition, () => {
               }"
               class="page-handle"
               mx-auto
-              @click="cyclePosition"
-            />
+            >
+              {{ appVersion }}
+            </div>
             <div class="route-container">
               <RouterView pa-0 />
             </div>
@@ -183,7 +167,7 @@ watch(() => uiStore.pagePosition, () => {
       </v-row>
     </div>
     <TheBottomNavigation />
-  </div>
+  </v-container>
 </template>
 
 <style scoped>
@@ -191,22 +175,27 @@ watch(() => uiStore.pagePosition, () => {
   position: relative;
   height: 100vh;
   width: 100%;
+  max-width: 800px;
   /* overflow: hidden; */
 }
 .page-handle {
+  display: flex;
   height: 20px;
   width: 80px;
   margin-top: -10px;
   background-color: #e65100;
   border-radius: 10px;
+  color: white;
+  font-size: 0.8em;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
 }
 .page-container {
+  border-top: 2px solid #e65100;
   transition: all 0.3s ease-in-out;
   padding: 0;
-  /* overflow-y: scroll; */
-  /* background-color: white; */
   background-color: transparent;
-  /* background-color: #fff3e0; */
   position: fixed;
   bottom: 56px;
   left: 0;
@@ -225,7 +214,7 @@ watch(() => uiStore.pagePosition, () => {
 }
 .page-position-1 {
   background: #e65100;
-  height: calc(20vh - 56px);
+  height: 90px;
 }
 .page-position-0 {
   height: 5px;
@@ -234,5 +223,19 @@ watch(() => uiStore.pagePosition, () => {
 .route-container {
   overflow-y: hidden;
   height: 100%;
+}
+
+.splash-screen-enter-active {
+  transition: opacity 0.5s;
+}
+.splash-screen-leave-active {
+  transition: all 0.5s;
+}
+.splash-screen-enter-from {
+  opacity: 1;
+}
+.splash-screen-leave-to {
+  opacity: 0;
+  transform: translateY(100px);
 }
 </style>

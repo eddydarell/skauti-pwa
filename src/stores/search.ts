@@ -1,10 +1,8 @@
 import { defineStore } from 'pinia'
 
-const businessStore = useBusinessStore()
-
 export const useSearchStore = defineStore('search', () => {
   const results = ref([])
-
+  const radius = ref(50) // in km
   const searchQuery = ref('')
   const baseUrl = import.meta.env.VITE_API_URL
 
@@ -28,10 +26,13 @@ export const useSearchStore = defineStore('search', () => {
     return { data, pending, error, refresh }
   }
 
-  const searchByQuery = async (query: string, type: string = 'all') => {
+  const searchByQuery = async (query: string, type: string = 'all', radius: number, lat: number, lng: number) => {
     const queryParam = new URLSearchParams({
       query,
       type,
+      radius: radius.toString(),
+      lat: lat.toString(),
+      lng: lng.toString(),
     })
     const { data, pending, error, refresh } = await useFetch(
       `${baseUrl}/pwa/search/business/query?${queryParam.toString()}`,
@@ -44,6 +45,8 @@ export const useSearchStore = defineStore('search', () => {
   }
 
   return {
+    results,
+    radius,
     searchQuery,
     searchById,
     searchByQuery,

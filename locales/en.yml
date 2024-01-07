@@ -25,8 +25,10 @@ buttons:
   less: Less
   login-register: Login / Register
   more: More
+  next: Next
   ok: OK
   open-map: Open map
+  previous: Previous
   register: Register
   remove-address: Remove address
   save: Save
@@ -34,6 +36,7 @@ buttons:
   show-reviews: Show reviews
   submit: Submit
   submit-review: Submit review
+  try-again: Try again
   update: Update
   view: View
 days:
@@ -58,7 +61,12 @@ hints:
   radius-for-geofencing: 'Radius for geofencing. '
   review: Please leave a review
 info:
+  km-of-you: km of you
+  no-results: No results found
   not-available: Not available
+  results-found: results found for search
+  search-within: Search within
+  within: Within
 intro:
   aka: Also known as
   desc: Opinionated Vite Starter Template
@@ -69,6 +77,11 @@ labels:
   address: address
   all-day: All day
   anonymous: Review anonymously
+  business-visibility-radius: Business visibility radius
+  business-visibility-radius-description: >-
+    Businesses can choose to aply a visibility radius to their addresses. If you
+    are outside of a business visibility radius, it will not appear to you even
+    if it is within your search radius.
   category: Category
   city: City
   closed: Closed
@@ -79,8 +92,11 @@ labels:
   days-off: Days off
   description: Description
   email: Email
+  general-settings: General settings
+  information: General info
   is-primary: Primary
   kilometers: Km
+  km: km
   leave-review: Leave a review
   legal-address: Legal address
   legal-cancellation: Legal cancellation
@@ -110,7 +126,12 @@ labels:
   phone: Phone
   postal-code: Postal code
   radius: Radius
+  save: Save
   search-placeholder: Category, business, services...
+  search-radius: Search radius
+  search-radius-description: >-
+    Businesses in this radius will appear in your searches and suggestions. If
+    you don't find a business, try searching in a wider radius.
   social-media: Social media
   social-media-links: Social media links
   street: Street
@@ -143,9 +164,36 @@ links:
   update: Update business
 messages:
   address-saved: Address saved
+  attributions: 'This service is made possible thanks to :'
+  click-next: Click "NEXT" to proceed
+  confirm: You are all set!
+  confirm2: 'Here''s what other in your area have been searching for: '
+  done: Done
   error-occurred: An error occured.
+  here: here
   loading-map: Loading map
+  location: 'Skauti uses your location to find small businesses around you. '
+  location2: Please allow Skauti to access your location
+  location3: Location successful!
+  location4: Thank you! Your location has been updated
+  location5: Location unavailable
+  location6: >-
+    We were unable to access your location. If you still have trouble enabling
+    your location, please see the help section
+  mobile-optimized: This web app is optimized for mobile devices. Please open it on your phone
+  or: or
   this-is-how-far-your-business-can-appear: This is how far Skauti users can see your business when searching.
+  welcome: Hey there, Welcome to Skauti.
+  welcome2: >-
+    Welcome to Skauti! We're thrilled to introduce our web-based service
+    designed to uplift small business owners by providing them with a vibrant
+    online presence. Our goal is to make it easy for potential customers,
+    collaborators, and more to discover your business, get a quick sense of what
+    others think, and make informed decisions. Join us in bringing your business
+    into the digital spotlight!
+  welcome3: >-
+    To get started with our services, simply follow these easy steps. Just click
+    the "Next" button, and you'll be on your way. We can't wait to assist you!
 not-found: Not found
 paragraph:
   are-you-sure-you-want-to-delete-address: Are you sure you want to delete this address?
@@ -222,6 +270,7 @@ paragraphs:
     results.
   more-than-one-address-returned: This address gave more than one location on the map.
   no-reviews-yet: Be the first to leave a review bellow...
+  or-try-searching-in-a-wider-radius: Or try searching in a wider radius
   please-refere-to-the-address-form: Please refer to the address form
   please-refere-to-the-category-form: 'Please refer to the category form '
   please-refere-to-the-social-media-form: Please refer to the social medias form
@@ -262,12 +311,15 @@ paragraphs:
     presence more than those without. Online listings contribute to your
     business's credibility and legitimacy, building trust among potential
     customers.
+  try-searching-for-a-business: Try searching for a business, category, tags, service or product...
   users: users
   we-are-unable-to-load-your-businesses: We are unable to load your businesses at the moment.
   you-can-try: You can try searching in a bigger radius.
   your-business-is-visible-in-this-radius: Your business will be visible to Skauti users in this radius
 subtitles:
   required-fields: Fields marked with * are required
+t-titles:
+  nothing-to-show: Nothing to show here
 time:
   afternoon: afternoon
   evening: evening
@@ -282,9 +334,12 @@ titles:
   account: Account
   add-your-business: Add a new business
   addresses: Addresses
+  anonymous: Anonymous
   are-you-sure-you-want-to-delete-business: Are you sure you want to delete your business?
+  attributions: Attributions
   categories: Categories
   conditions: Conditions
+  confirm: Confirm
   contact: Contact
   danger-zone: Danger zone
   days-off: Days off
@@ -295,6 +350,7 @@ titles:
   images: Images
   leave-a-review: Leave a review
   loading: Loading...
+  location: Location services
   login: Login
   login-to-leave-a-review: Login to leave a review
   no-businesses-found: No businesses found.
@@ -310,16 +366,20 @@ titles:
   rating-overview: Rating overview
   register-your-business: Register your business
   review-overview: Rating overview
+  search-radius: Search radius
   services: Services
   settings: Settings
   social-medias: Social medias
   something-went-wrong: Something went wrong
   subcategories: Subcategories
+  term-of-service: Terms of Service
   terms: Terms and conditions
   under-construction: Under construction
   update-your-business: Update your business
   user: User
+  welcome: Welcome to Skauti
   your-businesses: Your businesses
+  your-review: Your review
 units:
   kilometers: Km
 validation-messages:

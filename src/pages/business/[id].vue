@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
 const businessId = computed(() => Number(route.params.id))
-const businessStore = useBusinessStore()
-const business = businessStore.getBusinessById(businessId.value)
 const uiStore = useUIStore()
 
 onMounted(() => {

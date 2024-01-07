@@ -1,3 +1,8 @@
+<!--
+eslint-disable
+tslint:disable
+eslint-disable vue/no-multiple-template-root
+-->
 <script setup lang="ts">
 import { useEventBus, useGeolocation } from '@vueuse/core'
 
@@ -10,9 +15,10 @@ const circles = ref(null)
 const userMarker = ref(null)
 const userAccuracyCircle = ref(null)
 const leafletTileUrl = import.meta.env.VITE_LEAFLET_TILE_URL
+
 const businessStore = useBusinessStore()
 const userStore = useUserStore()
-const { coords, locatedAt, error, resume, pause, isSupported } = useGeolocation()
+const { coords, locatedAt, resume, pause, isSupported } = useGeolocation()
 
 bus.on(mapEventListener)
 
@@ -21,7 +27,7 @@ const mapHeight = computed(() => {
     case 0:
       return '100vh'
     case 1:
-      return '80vh'
+      return 'calc(100vh - 146px)'
     case 2:
       return '50vh'
     case 3:
@@ -35,56 +41,97 @@ const mapHeight = computed(() => {
 })
 
 function initMap(elementId: string, initCoordinates: { latitude: any, longitude: any }) {
-  const map = L.map(elementId, {
-    zoomControl: false,
-  }).setView([initCoordinates.latitude, initCoordinates.longitude], 13)
+  // MAp bounds
+  const southWest = L.latLng(-89.98155760646617, -180)
+  const northEast = L.latLng(89.99346179538875, 180)
+  const bounds = L.latLngBounds(southWest, northEast)
 
-  L.tileLayer(leafletTileUrl, {
+  const defaultLayer = L.tileLayer(leafletTileUrl, {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">',
+  })
+
+  const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  })
+
+  const stadiaSmoothLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 0,
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'png',
+  })
+
+  const staOSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 0,
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'png',
+  })
+
+  const cartoLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20,
+  })
+
+  const osmHotLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France',
+  })
+
+  const baseMaps = {
+    'Default': defaultLayer,
+    'Satellite': satelliteLayer,
+    'Stadia Smooth': stadiaSmoothLayer,
+    // 'Stadia OSM Bright': staOSMBright,
+    // 'OSM Hot': osmHotLayer,
+    // 'Carto Light': cartoLayer,
+  }
+
+  const map = L.map(elementId, {
+    zoomControl: false,
+    maxBounds: bounds, // Set the maxBounds option
+    minZoom: 2,
+    maxZoom: 19,
+    zoomVisibility: true,
+    maxBoundsViscosity: 1.0,
+    attributionControl: false,
+    edgeBufferTiles: 3,
+    layers: [
+      defaultLayer,
+      satelliteLayer,
+      stadiaSmoothLayer,
+      staOSMBright,
+      cartoLayer,
+      osmHotLayer,
+
+    ],
+  }).setView([initCoordinates.latitude, initCoordinates.longitude], 13)
+
+  L.control.layers(baseMaps).addTo(map)
+  L.control.scale({
+    position: 'topleft',
+    metric: true,
+    imperial: false,
   }).addTo(map)
 
   return map
 }
 
-function addMarker(map: any, latLong: any, icon: any) {
-  const marker = L.marker(latLong, { icon }).addTo(map)
-  return marker
-}
-
-function addCircle(map: any, latLong: any, radius: any, color: any) {
-  const circle = L.circle(latLong, {
-    color: color ?? '#E6510030',
-    fillColor: color ?? '#E65100',
-    fillOpacity: 0.15,
-    radius,
-  }).addTo(map)
-
-  return circle
-}
-
-function addMarkerPopup(marker: { bindPopup: (arg0: any) => void }, popupContent: any) {
-  marker.bindPopup(popupContent)
-}
-
-function addCirclePopup(circle: { bindPopup: (arg0: any) => void }, popupContent: any) {
-  circle.bindPopup(popupContent)
-}
-
 function mapEventListener(event: string) {
   map.value?.invalidateSize()
 
-  console.log('Map center', (map.value as L.Map)?.getCenter())
-  console.log(`Map event: ${event}`)
   if (event === 'fit-business-list-markers') {
+    if (!markers.value)
+      bus.emit('center-map-on-user')
     const bounds: any[] = []
     for (const marker of markers.value.getLayers())
       bounds.push(marker.getLatLng())
     setTimeout(() => {
       map.value?.invalidateSize(true)
-      map.value?.flyToBounds(bounds, { padding: [20, 20], maxZoom: 9 })
+      map.value?.flyToBounds(bounds, 13)
     }, 200)
-    // map.value?.panTo(newCenter)
   }
   else if (event === 'focus-business-marker') {
     map.value?.invalidateSize()
@@ -116,58 +163,52 @@ function mapEventListener(event: string) {
       resume()
       map.value?.invalidateSize()
       map.value?.setView([coords.value.latitude, coords.value.longitude], 13)
-    }, 100)
+    }, 150)
+  }
+  else if (event === 'map-resize') {
+    map.value?.invalidateSize()
+    setTimeout(() => {
+      map.value?.invalidateSize()
+      const bounds: any[] = []
+      for (const marker of markers.value.getLayers())
+        bounds.push(marker.getLatLng())
+      if (bounds) {
+        map.value?.invalidateSize()
+        map.value?.flyToBounds(bounds)
+      }
+    }, 150)
   }
 }
 
-function offsetMapCenter() {
-  const offset = 0.35 // useUIStore().pagePosition === 3 ? 0.35 : 0.25
-  const centerPixel = map.value?.latLngToContainerPoint(map.value?.getCenter())
-
-  centerPixel.y += map.value?.getSize().y * offset
-  const newCenter = map.value?.containerPointToLatLng(centerPixel)
-  return newCenter
-}
-
 onBeforeMount(() => {
-  if (isSupported.value)
-    console.log('Geolocation is supported')
-
-  else
-    console.log('Geolocation is not supported')
+  if (!isSupported.value)
+    throw new Error('Geolocation is not supported')
 })
 
 onMounted(async () => {
   // setTimeout(() => {
   map.value = initMap('map', { latitude: 0, longitude: 0 })
   map.value?.on('resize', () => {
-    console.log('Map resized')
     (map.value as L.Map)?.invalidateSize()
   })
-  markers.value = L.layerGroup()
+  markers.value = L.layerGroup() // .markerClusterGroup() for clustering
   circles.value = L.layerGroup()
 
-  if (isSupported.value) {
-    console.log(coords.value)
-    console.log(map.value)
-  }
-  else {
-    console.log(`Geolocation is not supported by this browser.`)
-  }
+  // if (!isSupported.value) {
+  //   console.log(`Geolocation is not supported by this browser.`)
+  // }
   // }, 100)
 })
 
 watch(() => coords.value, () => {
-  console.log('Coords changed')
-  console.log(coords.value)
   const timeDiff = Date.now() - locatedAt.value
 
   // Prevents location from being updated too often
-  if (coords.value.latitude !== Number.POSITIVE_INFINITY && coords.value.longitude !== Number.POSITIVE_INFINITY && timeDiff < 10000) { pause() }
-  else {
+  if (coords.value.latitude !== Number.POSITIVE_INFINITY && coords.value.longitude !== Number.POSITIVE_INFINITY && timeDiff < 10000)
+    pause()
+  else
     resume()
-    console.log('Resumed coordinated refresh')
-  }
+    // console.log('Resumed coordinated refresh')
 
   userStore.coordinates = {
     lat: coords.value.latitude,
@@ -209,8 +250,10 @@ watch(() => coords.value, () => {
 watch(() => businessStore.businesses, () => {
   markers.value?.clearLayers()
   circles.value?.clearLayers()
+  map.value.invalidateSize()
   setTimeout(() => {
     if (map.value) {
+      map.value.invalidateSize()
       const allLatLongs = []
       for (let i = 0; i < businessStore.businesses.length; i++) {
         const business = businessStore.businesses[i]
@@ -241,7 +284,6 @@ watch(() => businessStore.businesses, () => {
           circle.bindPopup(`Circle`)
 
           marker.on('click', () => {
-            console.log('Marker clicked')
             businessStore.selectedBusiness = business
             bus.emit('focus-business-marker')
             navigateTo(`/business/${business.id}`)
@@ -252,12 +294,15 @@ watch(() => businessStore.businesses, () => {
         }
       }
 
+      map.value.invalidateSize()
       map.value?.addLayer(markers.value)
-      map.value?.fitBounds(allLatLongs)
+      if (allLatLongs.length > 0)
+        map.value?.fitBounds(allLatLongs)
+      else bus.emit('center-map-on-user')
       // map.value?.addLayer(circles.value)
     }
     else {
-      console.log('No map', map.value)
+      throw new Error('No map', map.value)
     }
   }, 100)
 })

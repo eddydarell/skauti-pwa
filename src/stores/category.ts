@@ -7,7 +7,11 @@ export const useCategoryStore = defineStore('category', () => {
   const baseUrl = import.meta.env.VITE_API_URL
 
   const fetchAllCategories = async () => {
-    const { data, pending, error, refresh } = await useFetch(
+    const {
+      data,
+      error,
+      isFinished,
+    } = await useFetch(
       `${baseUrl}/categories`,
       {
         method: 'GET',
@@ -30,7 +34,7 @@ export const useCategoryStore = defineStore('category', () => {
       }
     }).flat()
 
-    return { data, pending, error, refresh }
+    return { data, error, isFinished }
   }
 
   const fetchCategoryById = async (id: number) => {
