@@ -12,6 +12,7 @@ buttons:
   add-social-media-link: Add social media
   add-social-media-links: Add social media links
   cancel: Cancel
+  close: Close
   collapse: Collapse
   confirm: Confirm
   delete: Delete
@@ -19,6 +20,7 @@ buttons:
   delete-business: Delete business
   edit: Edit
   edit-address: Edit address
+  enter-address: Enter address
   expand: Expand
   fill-random-data: Random data
   hide-reviews: Hide reviews
@@ -62,6 +64,10 @@ hints:
   review: Please leave a review
 info:
   km-of-you: km of you
+  location-unavailable: 'Skauti needs to access your location to work optimally. '
+  location-unavailable-2: >-
+    You can manually enter your address to use Skauti without sharing your
+    current location.
   no-results: No results found
   not-available: Not available
   results-found: results found for search
@@ -116,6 +122,7 @@ labels:
   legal-terms-file: Legal terms file
   legal-terms-url: Legal terms URL
   legal-website: Legal website
+  location-unavailable: Location unavailable
   logo: Logo
   meters-from-this-point: from this point
   more: More

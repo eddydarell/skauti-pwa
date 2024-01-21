@@ -155,7 +155,7 @@ onMounted(() => {
 
 <style scoped>
 .search-box {
-  margin-top: -20px;
+  margin-top: -20px !important;
 }
 .floating {
   position: absolute;

@@ -16,7 +16,9 @@ const show = ref(true)
 dayjs.extend(isBetween)
 
 const businessStore = useBusinessStore()
-const business = computed(() => businessStore.getBusinessById(props.businessId))
+const business = computed(() => {
+  return businessStore.businesses.find(business => business.id === props.businessId)
+})
 const bus = useEventBus<string>('map-events')
 const { t } = useI18n()
 const { navigateTo } = useNavigation()

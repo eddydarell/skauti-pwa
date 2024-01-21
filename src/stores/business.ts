@@ -76,11 +76,13 @@ export const useBusinessStore = defineStore('business', () => {
     businesses.value = data.value
   }
 
-  const fetchBusinessById = async (id: string) => {
+  const fetchBusinessById = async (id: number) => {
     if (!id) {
       console.error('No id provided')
       return
     }
+
+    console.log('Business id: ', id)
 
     const {
       isFetching,
@@ -90,21 +92,23 @@ export const useBusinessStore = defineStore('business', () => {
       statusCode,
       isFinished,
       canAbort,
-      execute,
-    } = await useFetch(`${baseUrl}/pwa/businesses/${id}`).get().json()
-    isLoading.value = isFetching.value
-    hasFinished.value = isFinished.value
-    fetchStatusCode.value = statusCode
-    fetchExecute.value = execute
-    fetchCanAbort.value = canAbort.value
-    fetchAbort.value = abort
+    } = await useFetch(`${baseUrl}/pwa/businesses/${id}`, {
+      refetch: false,
+    }).get().json()
 
-    if (error.value) {
-      console.error('Error: ', error.value)
-      hasFetchFailed.value = true
-      isLoading.value = false
-      return
-    }
+    console.log('Business data: ', data)
+    // isLoading.value = isFetching.value
+    // hasFinished.value = isFinished.value
+    // fetchStatusCode.value = statusCode
+    // fetchCanAbort.value = canAbort.value
+    // fetchAbort.value = abort
+
+    // if (error.value) {
+    //   console.error('Error: ', error.value)
+    //   hasFetchFailed.value = true
+    //   isLoading.value = false
+    //   return
+    // }
     businesses.value = data.value
   }
 

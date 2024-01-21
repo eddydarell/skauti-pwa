@@ -196,7 +196,7 @@ watch(() => uiStore.pagePosition, () => {
   border-top: 2px solid #e65100;
   transition: all 0.3s ease-in-out;
   padding: 0;
-  background-color: transparent;
+  background-color: white;
   position: fixed;
   bottom: 56px;
   left: 0;

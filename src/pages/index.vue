@@ -7,9 +7,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div>
-    <TheMainPane />
-  </div>
+  <TheMainPane />
 </template>
 
 <route lang="yaml">
