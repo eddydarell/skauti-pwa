@@ -107,7 +107,7 @@ export default defineConfig({
         name: 'Skauti',
         short_name: 'Skauti',
         theme_color: '#E65100',
-        background_color: '#E65100',
+        background_color: '#FFF',
         categories: ['business', 'education', 'geolocation', 'productivity', 'social', 'sports', 'travel', 'utilities'],
         display: 'standalone',
         display_override: ['fullscreen', 'minimal-ui'],
@@ -119,6 +119,11 @@ export default defineConfig({
         lang: 'en-US',
 
         icons: [
+          {
+            src: '/pwa-32x32.png',
+            sizes: '32x32',
+            type: 'image/png',
+          },
           {
             src: '/pwa-48x48.png',
             sizes: '48x48',
