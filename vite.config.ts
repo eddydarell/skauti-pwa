@@ -106,10 +106,10 @@ export default defineConfig({
       manifest: {
         name: 'Skauti',
         short_name: 'Skauti',
-        theme_color: '#E65100',
+        theme_color: '#3498db',
         background_color: '#FFF',
         categories: ['business', 'education', 'geolocation', 'productivity', 'social', 'sports', 'travel', 'utilities'],
-        display: 'standalone',
+        display: 'fullscreen',
         display_override: ['fullscreen', 'minimal-ui'],
         scope: '/',
         start_url: '/',
