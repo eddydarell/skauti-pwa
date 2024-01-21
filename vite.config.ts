@@ -107,15 +107,46 @@ export default defineConfig({
         name: 'Skauti',
         short_name: 'Skauti',
         theme_color: '#E65100',
+        background_color: '#E65100',
+        categories: ['business', 'education', 'geolocation', 'productivity', 'social', 'sports', 'travel', 'utilities'],
+        display: 'standalone',
+        display_override: ['fullscreen', 'minimal-ui'],
+        scope: '/',
+        start_url: '/',
+        orientation: 'portrait',
+        description: 'Skauti is a PWA that helps you find local businesses and services.',
+        dir: 'ltr',
+        lang: 'en-US',
+
         icons: [
           {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
+            src: '/pwa-48x48.png',
+            sizes: '48x48',
             type: 'image/png',
           },
           {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
+            src: '/pwa-72x72.png',
+            sizes: '72x72',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-96x96.png',
+            sizes: '96x96',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-144x144.png',
+            sizes: '144x144',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-168x168.png',
+            sizes: '168x168',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-192x192.png',
+            sizes: '192x192',
             type: 'image/png',
           },
           {
