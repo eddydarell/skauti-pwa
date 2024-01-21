@@ -16,12 +16,12 @@ onMounted(() => {
 <template>
   <div>
     <TheSearchBox pa-4 />
-    <transition name="show-slide" appear mode="out-in">
+    <Transition name="show-slide" appear mode="out-in">
       <NoResults v-if="uiStore.searchActive && !hasBusinesses" />
       <div v-else-if="uiStore.searchActive && hasBusinesses" class="list-wrapper">
         <TheBusinessList />
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 

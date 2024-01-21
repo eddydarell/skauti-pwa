@@ -23,7 +23,6 @@ declare module 'vue' {
     TheInput: typeof import('./components/TheInput.vue')['default']
     TheMainPane: typeof import('./components/TheMainPane.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
-    TheMap_old: typeof import('./components/TheMap_old.vue')['default']
     TheMenu: typeof import('./components/TheMenu.vue')['default']
     TheMobileInfoBox: typeof import('./components/TheMobileInfoBox.vue')['default']
     TheSearchBox: typeof import('./components/TheSearchBox.vue')['default']

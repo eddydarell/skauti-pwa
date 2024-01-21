@@ -1,9 +1,18 @@
 <script setup lang="ts">
 const route = useRoute()
 const businessId = computed(() => Number(route.params.id))
+const businessStore = useBusinessStore()
 const uiStore = useUIStore()
 
-onMounted(() => {
+onBeforeMount(async () => {
+  if (businessStore.businesses.length < 1) {
+    console.log('Refreshed')
+    await businessStore.fetchBusinessById(businessId.value)
+    console.log(businessStore.businesses)
+  }
+})
+
+onMounted(async () => {
   uiStore.pagePosition = 3
 })
 </script>

@@ -55,31 +55,6 @@ function initMap(elementId: string, initCoordinates: { latitude: any, longitude:
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
   })
 
-  // const stadiaSmoothLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}', {
-  //   minZoom: 0,
-  //   maxZoom: 20,
-  //   attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  //   ext: 'png',
-  // })
-
-  // const staOSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.{ext}', {
-  //   minZoom: 0,
-  //   maxZoom: 20,
-  //   attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  //   ext: 'png',
-  // })
-
-  // const cartoLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  //   subdomains: 'abcd',
-  //   maxZoom: 20,
-  // })
-
-  // const osmHotLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-  //   maxZoom: 19,
-  //   attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France',
-  // })
-
   const baseMaps = {
     Satellite: satelliteLayer,
     Default: defaultLayer,
@@ -130,7 +105,10 @@ function mapEventListener(event: string) {
       const mainAddress = businessStore.selectedBusiness.addresses[0]
       const latLong = L.latLng(mainAddress.latitude, mainAddress.longitude)
       map.value?.invalidateSize(true)
-      map.value?.flyTo(latLong, 15)
+      map.value?.flyTo(latLong, 15, {
+        animate: true,
+        duration: 0.15,
+      })
 
       setTimeout(() => {
         const selectedBusinessMarker = markers.value?.getLayers().find((layer: { _icon: { classList: { contains: (arg0: string) => any } } }) => layer._icon.classList.contains(`business-marker-selected`))
@@ -153,6 +131,7 @@ function mapEventListener(event: string) {
     setTimeout(() => {
       resume()
       map.value?.invalidateSize()
+      console.log('Centering map on user', coords.value.latitude, coords.value.longitude)
       map.value?.setView([coords.value.latitude, coords.value.longitude], 13)
     }, 150)
   }
@@ -205,6 +184,8 @@ watch(() => coords.value, () => {
     lat: coords.value.latitude,
     lng: coords.value.longitude,
   }
+
+  console.log('User coordinates updated', userStore.coordinates)
 
   userStore.radius = coords.value.accuracy
 
